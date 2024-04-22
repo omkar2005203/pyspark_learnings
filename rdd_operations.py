@@ -36,3 +36,19 @@ print(result.mapValues(list).collect())
 new_data = sc.parallelize([('alice',30),('alice',35),("sam",45),("tom",56),("kim",55)])
 result = new_data.mapValues(lambda x:x+5)
 print(result.collect())
+
+
+sentences_rdd = sc.parallelize([
+    "Apache Spark is a unified analytics engine",
+    "for big data processing, with built-in modules",
+    "for streaming, SQL, machine learning, and graph processing"
+])
+
+
+data = sentences_rdd.map(lambda x:x.split(" "))
+
+print(data.collect())
+
+#applying flatmap
+flat_map_data = sentences_rdd.flatMap(lambda x:x.split(" "))
+print(flat_map_data.collect())

@@ -22,14 +22,16 @@ rdd = lines.map(parseline)
 # output: ((age,num of friends),1)
 total_age = rdd.map(lambda x:(x,1))
 
-for i in total_age.collect():
-    print(i)
+# for i in total_age.collect():
+#     print(i)
 
 totalByAge = rdd.mapValues(lambda x:(x,1)).reduceByKey(lambda x,y:(x[0]+y[0],x[1]+y[1]))
+
+print(totalByAge.collect())
 
 averageByAge = totalByAge.mapValues(lambda x:x[0]/x[1])
 
 data = averageByAge.collect()
 
-for i in data:
-    print(i)
+# for i in data:
+#     print(i)
